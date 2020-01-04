@@ -1,0 +1,9 @@
+
+
+<div *ngFor="let contact of contacts$ | async">
+  <p> 
+    {{ contact.name }} 
+  </p>
+</div>
+
+<a routerLink='contacts'> Fav Contacts </a>

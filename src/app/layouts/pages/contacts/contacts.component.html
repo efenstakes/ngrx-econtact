@@ -1,0 +1,20 @@
+
+
+<form (ngSubmit)="addContact()">
+    <input type="text" name="name" placeholder="Enter Name"
+           [(ngModel)]="name">
+    <button type="submit"> ADD </button>
+</form>
+
+<div *ngFor="let contact of contacts$ | async">
+  <p> 
+    {{ contact.name }} 
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary" 
+            (click)="addToFavContacts(contact)"> 
+        Favify 
+    </button>
+  </p>
+</div>
+
+<button (click)="goToFavContacts()"> Fav Contacts </button>
