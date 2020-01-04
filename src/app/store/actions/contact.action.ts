@@ -8,8 +8,17 @@ import { Contact } from 'src/app/models/contact.model'
 export enum ContactActionTypes {
     ADD = '[Contacts] Add Contact',
     LOAD = '[Contacts] Load Contacts',
+    LOADING = '[Contacts] Loading Contacts',
     LOAD_SUCCESS = '[Contacts] Load Contacts Success',
+    LOAD_ERROR = '[Contacts] Load Contacts Error'
 }
+
+
+// loading contacts
+export const loadingContacts = createAction(
+    ContactActionTypes.LOADING, 
+    props<{}>()
+)
 
 
 // request contacts to be loaded 
@@ -22,6 +31,12 @@ export const loadContacts = createAction(
 export const loadContactsSuccess = createAction(
     ContactActionTypes.LOAD_SUCCESS, 
     props<{ contacts: Array<Contact> }>()
+)
+
+// error
+export const loadContactsError = createAction(
+    ContactActionTypes.LOAD_ERROR, 
+    props<{ }>()
 )
 
 

@@ -3,10 +3,22 @@ import { Contact } from 'src/app/models/contact.model';
 
 import * as ContactActions from '../actions/contact.action'
 
-let initialState: Contact[] = [
-   { id: 45, name: 'Ed mufasa' },
-   { id: 56, name: 'Lily mufasa' },
-]
+export interface ContactState {
+    isLoading: boolean,
+    contacts: Array<Contact>
+}
+
+// let initialState: Contact[] = [
+//    { id: 45, name: 'Ed mufasa' },
+//    { id: 56, name: 'Lily mufasa' },
+// ]
+let initialState: ContactState = {
+    isLoading: false,
+    contacts: [
+        { id: 45, name: 'Ed mufasa' },
+        { id: 56, name: 'Lily mufasa' },
+     ]
+}
 
 // handle contact state
 export const contactsReducer = createReducer(
@@ -19,10 +31,41 @@ export const contactsReducer = createReducer(
     */
 
     // loading contacts
+    // on(
+    //     ContactActions.loadContacts,
+    //     (state)=> {
+    //         return state;
+    //     }
+    // ),
+    
+    // loading contacts
     on(
         ContactActions.loadContacts,
         (state)=> {
-            return state;
+            return {
+                contacts: [...state.contacts], isLoading: true
+            };
+        }
+    ),
+
+    // loading 
+    on(
+        ContactActions.loadingContacts,
+        (state, action)=> {
+            return {
+                ...state, isLoading: true
+            }
+        }
+    ),
+
+     // loading contacts success
+     on(
+        ContactActions.loadContactsSuccess,
+        (state, action)=> {
+            return {
+                contacts: [ ...state.contacts, ...action.contacts ],
+                isLoading: false
+            };
         }
     ),
 
@@ -33,7 +76,10 @@ export const contactsReducer = createReducer(
         // the function to call to update state
         (state, action)=> {
             console.log('adding contact')
-            return [ ...state, action.contact ]
+            return {
+                contacts: [ ...state.contacts, action.contact ],
+                isLoading: false
+            }
         }
     )
 

@@ -7,7 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { StoreModule } from '@ngrx/store';
 import { contactsReducer } from './store/reducers/contact.reducer'
 import { favContactsReducer } from './store/reducers/favcontacts.reducers'
-
+import { ContactEffects } from './store/effects/contacts.effects'
 
 
 // app pages and components
@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './layouts/pages/home/home.component';
 import { ContactsComponent } from './layouts/pages/contacts/contacts.component';
 import { FavContactsComponent } from './layouts/pages/fav-contacts/fav-contacts.component';
+import { EffectsModule } from '@ngrx/effects';
 
 
 
@@ -38,6 +39,7 @@ import { FavContactsComponent } from './layouts/pages/fav-contacts/fav-contacts.
       contacts: contactsReducer,
       favContacts: favContactsReducer
     }),
+    EffectsModule.forRoot([ ContactEffects ]),
     StoreDevtoolsModule.instrument()
   ],
   providers: [],

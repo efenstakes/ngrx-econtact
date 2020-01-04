@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
 import { of, Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 import { Contact } from '../models/contact.model';
 
@@ -13,6 +14,7 @@ import { Contact } from '../models/contact.model';
 })
 export class ContactService {
 
+  URL: string = 'https://jsonplaceholder.typicode.com/users'
   contacts: Array<Contact> = [
     { id: 234, name: 'Eddy muso' },
     { id: 678, name: 'Ken awadi' },
@@ -28,8 +30,13 @@ export class ContactService {
   
   get_contacts(): Observable<Array<Contact>>{ return of(this.contacts) }
 
-  getContacts(): Observable<Array<Contact>> {
-    return 
+  getContacts(): Observable<Array<Contact>>{
+    return this.httpClient.get<Contact[]>(this.URL)
+              //  .pipe(
+              //    map((res: Array<String>)=> {
+              //      res.map((usr)=> { id: usr.id, name: usr.id })
+              //    })
+              //  )
   }
 
 
